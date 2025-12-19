@@ -1,4 +1,4 @@
-name: Unit Testing Pipeline
+name: Merged CI/CD Pipeline
 
 on:
   push:
@@ -7,19 +7,19 @@ on:
 jobs:
   unit-testing:
     runs-on: ubuntu-latest
-
+    
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
-
+      
     - name: Setup Node.js
       uses: actions/setup-node@v3
       with:
         node-version: '16.14.0'
-
+        
     - name: Install dependencies
       run: npm install --legacy-peer-deps
-
+      
     - name: Unit Testing
       run: npm test
 
@@ -33,8 +33,8 @@ jobs:
     - name: Set up Java
       uses: actions/setup-java@v3
       with:
-        distribution: 'temurin'
         java-version: '17'
+        distribution: 'temurin'
         
     - name: Set up Node.js
       uses: actions/setup-node@v3
@@ -55,7 +55,7 @@ jobs:
         format: HTML
         outDir: reports
         
-    - name: Upload dependency check report
+    - name: Upload Dependency-Check report
       uses: actions/upload-artifact@v4
       with:
         name: dependency-check-report
