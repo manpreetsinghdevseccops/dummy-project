@@ -1,4 +1,4 @@
-name: CI/CD Pipeline
+name: Merged CI/CD Pipeline
 
 on:
   push:
@@ -55,34 +55,11 @@ jobs:
     - name: Setup Node.js
       uses: actions/setup-node@v3
       with:
-        node-version: '16.14.0'
+        node-version: 16.14.0
     - name: Install dependencies
       run: npm install --legacy-peer-deps
     - name: Unit Testing
       run: npm test
-
-  sonarqube-scan:
-    needs: [unit-testing]
-    name: SonarQube Scan
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '16.14.0'
-      - name: Install Dependencies
-        run: npm ci --legacy-peer-deps
-      - name: SonarQube Scan 
-        uses: sonarsource/sonarqube-scan-action@v6
-        with:
-          projectBaseDir: .
-        env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
 
   owasp-dependency-check:
     runs-on: ubuntu-latest
