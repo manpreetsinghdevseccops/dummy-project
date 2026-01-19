@@ -111,7 +111,7 @@ jobs:
       - name: Adding service configs repo
         uses: actions/checkout@v2
         with:
-          repository: "manpreetsinghdevseccops/manpreet-service-configs"
+          repository: "devseccops/manpreet-service-configs"
           token: "${{ secrets.GH_TOKEN }}"
           path: manpreet-service-configs
           ref: "dev"
