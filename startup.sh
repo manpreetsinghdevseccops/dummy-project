@@ -2,7 +2,7 @@
  
  echo "Generating .env with param dev for service dummy-project"
  
- aws ssm get-parameters-by-path --path "/dev/dummy-project/" --with-decryption    --region undefined --query="Parameters[*].[Name, Value]"    --output text |
+ aws ssm get-parameters-by-path --path "/dev/dummy-project/" --with-decryption    --region ap-south-1 --query="Parameters[*].[Name, Value]"    --output text |
    while read line
    do
      name=$(echo ${line}} | cut -f 1 -d ' ' | sed -e "s//dev/dummy-project///g")
